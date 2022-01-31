@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BinarySearchTree
-{/// <summary>
-/// inserting values by BinarySearchTable
-/// </summary>
-/// <typeparam name="T"></typeparam>
+{
     class BinaryTree<T> where T : IComparable
     {
         public T NodeData { get; set; }
@@ -52,9 +49,32 @@ namespace BinarySearchTree
                 this.RightTree.Display();
             }
         }
-        public void GetSize() // this methos is for getting the size of the binary tree
+        public bool IfExists(T element, BinaryTree<T> node) //This method is used for to know the element present in 
+                                                            //a binary tree
         {
-            Console.WriteLine("Size" + " " + (1 + this.leftCount + this.rightCount));
+            if (node == null)
+            {
+                return false;
+            }
+            if (node.NodeData.Equals(element))
+            {
+                Console.WriteLine("Found the element in BST" + " " + node.NodeData);
+                result = true;
+            }
+            else
+            {
+                Console.WriteLine("Current element is {0} in BST ", node.NodeData);
+
+            }
+            if (element.CompareTo(node.NodeData) < 0)
+            {
+                IfExists(element, node.LeftTree);
+            }
+            if (element.CompareTo(node.NodeData) > 0)
+            {
+                IfExists((T)element, node.RightTree);
+            }
+            return result;
         }
     }
 }
